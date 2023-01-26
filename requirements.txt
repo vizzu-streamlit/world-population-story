@@ -1,0 +1,5 @@
+ipyvizzu
+ipyvizzu-story
+pandas
+streamlit
+numpy
