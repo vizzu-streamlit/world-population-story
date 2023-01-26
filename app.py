@@ -332,11 +332,8 @@ story.add_slide(slide14)
 # Switch on the tooltip that appears when the user hovers the mouse over a chart element.
 story.set_feature("tooltip", True)
 
-# If you want to save the story as an interactive HTML
-# (containing only the output of the previous cell),
-# use the following command:
-# story.export_to_html(filename="my_ipyvizzu-story.html")
-
 html(story._repr_html_(), width=width, height=height)
+
+st.download_button('Download HTML export', story.to_html(), file_name=f'world-population-story-{sel_continent}.html', mime='text/html')
 
 st.markdown('''T.B.D''')
