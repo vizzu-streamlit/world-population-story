@@ -7,122 +7,336 @@ import streamlit as st
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
-st.set_page_config(page_title="ipyvizzu-story in Streamlit", layout="centered")
+st.set_page_config(page_title="World Population Streamlit Story", layout="centered")
 #st.sidebar.title("Poll results - Presentation tools")
-st.title("Data Scientists' Presentation Tools")
-st.markdown(''' ### Hey there! Good to have you here! 😊
-A few weeks ago, we asked data scientists in 5 LinkedIn groups about how they prepare content in Jupyter Notebooks to present the results of their analysis to business stakeholders. 
-Here's a short data story we created from the combined results of these polls with [ipyvizzu-story](https://github.com/vizzuhq/ipyvizzu-story), a new, open-source data storytelling tool for data scientists. 🎬📈🚀
+st.title("T.B.D")
+st.markdown('''T.B.D''') 
 
-Feel free to fork and reuse the content by signing up for [Streamlit](https://streamlit.io/).
+width=750
+height=450
 
-***Tip for mobile view:*** *Use the full-screen icon in the bottom right corner of the chart.*
-''') 
+# initialize chart
+data = Data()
+df = pd.read_csv("Data/world_pop.csv", dtype={"Year": str})
+data.add_data_frame(df)
+#@title Create the story
 
+continents = df['Continent'].unique()
 
-def create_chart():
-    # initialize chart
-    data = Data()
-    df = pd.read_csv("Data/Poll_results.csv")
-    data.add_data_frame(df)
-    #@title Create the story
-    
-    story = Story(data=data)
-    story.set_size(700, 450)
+sel_continent = st.selectbox(
+    'Select continent',
+    list(continents))
 
-    label_handler_method = "if(event.data.text.split(' ')[0] < 6) event.preventDefault()"
+df_continent = df[df['Continent'] == sel_continent]
 
-    story.add_event("plot-marker-label-draw", label_handler_method)
+pop_max = int(df_continent[df_continent['Category'] == 'Population'][['Medium','High','Low']].max().T.max()*1.1)
 
-    slide1 = Slide(
-        Step( 
-            Style({
-                "legend": {"label": {"fontSize": "1.1em"}, "width":"16em"},
-                "plot": { 
-                    "marker": { "label": { "fontSize": "1.1em"}}, 
-                    #"paddingLeft": "10em",
-                    "xAxis": {"title": { "color": "#00000000"}, "label": { "fontSize": "1.1em"}},
-                    "yAxis": {"label": { "fontSize": "1.1em"}}},
-                "logo": {"width": "6em"}
-            }),
-            Config.percentageBar({
-                "x": "Group percentage [%]",
-                "y": "Group number",
-                "stackedBy": "Answer",
-                "title": "How do you prepare content in Jupyter for presentation?"
-            })
+df_future = df_continent[df_continent['Period'] == 'Future']
+
+df_futureCategories = df_future[df_future['Category']!='Population'][['Category','Medium','High','Low']];
+
+df_future_sum = df_futureCategories.groupby('Category').sum().T
+
+other_max = df_future_sum.max().max() * 1.1
+other_min = df_future_sum.min().min() * 1.1
+
+continent_palette = ["#FE7B00FF","#FEBF25FF","#55A4F3FF","#91BF3BFF","#E73849FF","#948DEDFF"]
+continent_palette_str = ' '.join(continent_palette)
+
+continent_color = continent_palette[list(continents).index(sel_continent)]
+
+category_palette = ["#FF8080FF", "#808080FF", continent_color.replace('FF','20'), "#60A0FFFF", "#80A080FF"]
+category_palette_str = ' '.join(category_palette)
+
+# Define the style of the charts in the story
+style = Style(
+    {
+        "plot": {
+            "yAxis": {
+                "label": {
+                    "fontSize": "1em",
+                    "paddingRight": "1.2em",
+                },
+                "title": {"color": "#ffffff00"},
+            },
+            'marker' :{ 
+                'label' :{ 'numberFormat' : 'prefixed','maxFractionDigits' : '1'}
+            },
+            "xAxis": {
+                "label": {
+                    "angle": "2.5",
+                    "fontSize": "1.1em",
+                    "paddingRight": "0em",
+                    "paddingTop": "1em",
+                },
+                "title": {"fontSize": "1em", "paddingTop": "2.5em"},
+            },
+        },
+    }
+)
+
+story = Story(data=data, style=style)
+story.set_size(width, height)
+
+# Add the first slide, containing a single animation step 
+# that sets the initial chart.
+slide1 = Slide(
+    Step(
+        Data.filter("record.Period === 'Past' && record.Category === 'Population'"),
+        Config(
+            {
+                "x":"Year",
+                "y": "Medium",
+                "label": "Medium",
+                "title": "The Population of the World 1950-2020",
+            }
         )
-    )
-    story.add_slide(slide1)
-
-    slide2 = Slide(
-    Step(
-        Style({ "plot": { "xAxis": { "label": { "color": "#00000000"}}}}),
-        Config({ "align": "min", "split": True, "title": "Answers vary across groups"})
-    )
-    )
-    story.add_slide(slide2)
-
-    slide3 = Slide(
-    Step(
-        Style({ "plot": { "marker": { "label": { "fontSize": "0.916667em"}}}}),
-        Config({ "x": {"set": ["Vote count","Answer"]}, "label": "Vote count", "title": "88% of votes came from two groups"}),
     )
 )
-    story.add_slide(slide3)
+# Add the slide to the story
+story.add_slide(slide1)
 
-    slide4 = Slide()
-    slide4.add_step(
-        Step(
-            Style({ "plot": { "yAxis": { "title": { "color": "#00000000"}}}}),
-            Config({ "x": "Answer", "y": ["Group number","Vote count"], "split": False, "legend": "color"})
+# Show components side-by-side
+slide2 = Slide(
+    Step(
+        Config(
+            {
+                "y": ["Medium","Continent"],
+                "color": "Continent",
+                "label": None,
+                "title": "The Population of Continents 1950-2020",
+            }
+        ),
+        Style({ "plot.marker.colorPalette": continent_palette_str })
+    )
+)
+story.add_slide(slide2)
+
+# Show components side-by-side
+slide3 = Slide()
+slide3.add_step(    
+    Step(
+        Data.filter("record.Category === 'Population'"),
+        Config(
+            {
+                "y": ["Medium","Continent"],
+                "color": "Continent",
+        #     "lightness": "Period",
+        #     "x": ["Year","Period"],
+                "title": "The Population of Continents 1950-2100",
+            }
+        )
+))
+
+slide3.add_step(    
+    Step(
+        Config(
+            {
+            "geometry":"area"
+            }
+        )
+))
+
+story.add_slide(slide3)
+
+slide4 = Slide(
+    Step(
+        Config(
+            {
+                "split": True
+            }
         )
     )
+)
+story.add_slide(slide4)
 
-    slide4.add_step(
-        Step(
-            Style({ "plot": { "marker": { "label": { "fontSize": "1.1em"}}}}),
-            Config({ "y": "Vote count", "title": "More than 1200 people voted"}),
+slide5 = Slide(
+    Step(
+        Config.percentageArea(
+            {
+                "x":"Year",
+                "y":"Medium",
+                "stackedBy":"Continent",
+                "title": "The Population of Continents 1950-2100 (%)"
+            }
         )
     )
-    story.add_slide(slide4)
+)
+story.add_slide(slide5)
 
-    slide5 = Slide()
-    slide5.add_step(
-        Step(
-            Config({ "x": ["Total percentage [%]","Answer"], "y": None, "label":"Total percentage [%]"})
+slide6 = Slide()
+slide6.add_step(    
+    Step(
+        Config.stackedArea(
+            {
+                "x":"Year",
+                "y":"Medium",
+                "stackedBy":"Continent",
+            }
+        )
+))
+
+slide6.add_step(    
+    Step(
+        Data.filter(f'record.Category === "Population" && record.Continent === "{sel_continent}"'),
+        Config({
+                "title": "The Population of "+sel_continent+" 1950-2100",
+                "channels":{"y":{
+                    "range":{"max":pop_max}
+                }}
+        }),
+    ))
+
+story.add_slide(slide6)
+
+slide7 = Slide(
+    Step(
+        Config(
+            {
+                "y":"High",
+                "title": "High prediction for "+sel_continent
+            }
         )
     )
+)
+story.add_slide(slide7)
 
-    slide5.add_step(
-        Step(
-        Style({ "plot": { "xAxis": {"label": {"color": "#00000000"}},
-        "marker": { "label": { "fontSize": "1.6em"}}, 
-        }}),            Config({ "coordSystem": "polar", "title":"Screenshots to PPT is the most popular option"})
+slide8 = Slide(
+    Step(
+        Config(
+            {
+                "y":"Low",
+                "title": "Low prediction for "+sel_continent
+            }
         )
     )
-    story.add_slide(slide5)
-    
-    # Switch on the tooltip that appears when the user hovers the mouse over a chart element.
-    story.set_feature("tooltip", True)
+)
+story.add_slide(slide8)
 
-    return story._repr_html_(),df
+slide9 = Slide(
+    Step(
+        Config(
+            {
+                "y":"Medium",
+                "title": "Medium prediction for "+sel_continent
+            }
+        )
+    )
+)
+story.add_slide(slide9)
+
+slide10 = Slide(
+    Step(
+        Data.filter(f'record.Continent === "{sel_continent}" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),
+        Config(
+            {
+                "y":["Medium","Category"],
+                "color": ["Category"],
+                "title": "Sources of growth: births and positive net migration"
+            }),
+        Style({ "plot.marker.colorPalette": category_palette_str })
+    )
+)
+story.add_slide(slide10)
+
+slide11 = Slide(
+    Step(
+        Data.filter(f'record.Continent === "{sel_continent}"'),
+        Config(
+            {
+                "title": "Sources of loss: deaths and negative net migration"
+            }
+        )
+    )
+)
+story.add_slide(slide11)
+
+slide12 = Slide()
+
+slide12.add_step(
+    Step(
+        Config(
+            {
+                "geometry":"rectangle",
+            }
+        )
+    )
+)
+
+slide12.add_step(
+    Step(
+        Data.filter(f'record.Period === "Future" && record.Continent === "{sel_continent}"'),
+        Config(
+            {
+                "title": "Zoom to the future"
+            }
+        )
+    )
+)
+
+slide12.add_step(
+    Step(
+        Data.filter(f'record.Period === "Future" && record.Continent === "{sel_continent}" && record.Category !== "Population"'),
+        Config(
+            {
+                "channels":{
+                    "x":{"set":["Medium","Year"],"range":{"max":other_max,"min":other_min}},
+                    "y":{"set": "Category", "range":{"max":"auto"}},
+                },
+                "title": "Sum of births, deaths, and migration after 2020 - Medium prediction"
+            }
+        )
+    )
+)
+
+slide12.add_step(
+    Step(
+        Config(
+            {
+                "x":"Medium",
+                "label":"Medium",
+            }
+        )
+    )
+)
 
 
-CHART,df = create_chart()
-html(CHART, width=700, height=450)
+story.add_slide(slide12)
 
-st.markdown('''
-            #### Create and publish similar data stories in Streamlit with [ipyvizzu-story](https://github.com/vizzuhq/ipyvizzu-story)
-            * Group 1: Data Science community (moderated) [https://www.linkedin.com/groups/3063585/](https://www.linkedin.com/groups/3063585/)
+slide13 = Slide(
+    Step(
+        Config(
+            {
+                "x":"High",
+                "label": "High",
+                "title": "Sum of births, deaths, and migration after 2020 - High prediction"
+            }
+        )
+    )
+)
+story.add_slide(slide13)
 
-            * Group 2: Data Scientist, Data Analyst and Data Engineer [https://www.linkedin.com/groups/6773411/](https://www.linkedin.com/groups/6773411/)
+slide14 = Slide(
+    Step(
+        Config(
+            {
+                "x":"Low",
+                "label": "Low",
+                "title": "Sum of births, deaths, and migration after 2020 - Low prediction"
+            }
+        )
+    )
+)
+story.add_slide(slide14)
 
-            * Group 3: Python Developers Community (moderated) [https://www.linkedin.com/groups/25827/](https://www.linkedin.com/groups/25827/)
+# Switch on the tooltip that appears when the user hovers the mouse over a chart element.
+story.set_feature("tooltip", True)
 
-            * Group 4: AI & ML  - Analytics , Data Science  .  SAP BI/ Analytics Cloud /Tableau /Power BI /Birst [https://www.linkedin.com/groups/1859449/](https://www.linkedin.com/groups/1859449/)
+# If you want to save the story as an interactive HTML
+# (containing only the output of the previous cell),
+# use the following command:
+# story.export_to_html(filename="my_ipyvizzu-story.html")
 
-            * Group 5: Artificial Intelligence, Digital Transformation Data Science, Automation, Machine Learning Analytics [https://www.linkedin.com/groups/4376214/](https://www.linkedin.com/groups/4376214/)
-            ''')    
+html(story._repr_html_(), width=width, height=height)
 
-st.balloons()
+st.markdown('''T.B.D''')
