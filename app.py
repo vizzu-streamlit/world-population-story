@@ -9,7 +9,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 st.set_page_config(page_title="World Population Streamlit Story", layout="centered")
 #st.sidebar.title("Poll results - Presentation tools")
-st.title("T.B.D")
+st.title("World Population Forecast - an interactive ipyvizzu-story in Streamlit")
 st.markdown('''T.B.D''') 
 
 width=750
@@ -38,7 +38,7 @@ df_futureCategories = df_future[df_future['Category']!='Population'][['Category'
 df_future_sum = df_futureCategories.groupby('Category').sum().T
 
 other_max = df_future_sum.max().max() * 1.1
-other_min = df_future_sum.min().min() * 1.1
+other_min = df_future_sum.max().max() * -1.1 #df_future_sum.min().min() * 1.1
 
 continent_palette = ["#FE7B00FF","#FEBF25FF","#55A4F3FF","#91BF3BFF","#E73849FF","#948DEDFF"]
 continent_palette_str = ' '.join(continent_palette)
@@ -69,7 +69,7 @@ style = Style(
                     "paddingRight": "0em",
                     "paddingTop": "1em",
                 },
-                "title": {"fontSize": "1em", "paddingTop": "2.5em"},
+                "title": {"color": "#ffffff00"},
             },
         },
     }
