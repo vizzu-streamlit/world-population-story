@@ -174,9 +174,6 @@ if skip_intro == False:
 
 slide6 = Slide()
 slide6.add_step(    
-    Step())
-
-slide6.add_step(    
     Step(
         Config.stackedArea(
             {
