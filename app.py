@@ -30,6 +30,7 @@ sel_continent = col1.selectbox(
     list(continents))
 
 skip_intro = col2.checkbox(
+    st.text(''),
     'Skip intro slides', value=False
 )
 
@@ -181,7 +182,8 @@ slide6.add_step(
                 "y":"Medium",
                 "stackedBy":"Continent",
             }
-        )
+        ),
+        Style({ "plot.marker.colorPalette": continent_palette_str })
 ))
 
 slide6.add_step(    
