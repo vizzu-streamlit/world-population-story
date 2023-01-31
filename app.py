@@ -23,14 +23,18 @@ data.add_data_frame(df)
 
 continents = df['Continent'].unique()
 
-col1, col2 = st.columns(2)
+#col1, col2 = st.columns(2)
 
-sel_continent = col1.selectbox(
+sel_continent = st.selectbox(
     'Select continent',
     list(continents))
 
+<<<<<<< HEAD
 skip_intro = col2.checkbox(
     st.text(''),
+=======
+skip_intro = st.checkbox(
+>>>>>>> b053e961b4bd926f1eabda516ee883c48a7d5da7
     'Skip intro slides', value=False
 )
 
@@ -174,6 +178,9 @@ if skip_intro == False:
     story.add_slide(slide5)
 
 slide6 = Slide()
+slide6.add_step(    
+    Step())
+
 slide6.add_step(    
     Step(
         Config.stackedArea(
