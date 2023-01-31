@@ -23,14 +23,13 @@ data.add_data_frame(df)
 
 continents = df['Continent'].unique()
 
-col1, col2 = st.columns(2)
+#col1, col2 = st.columns(2)
 
-sel_continent = col1.selectbox(
+sel_continent = st.selectbox(
     'Select continent',
     list(continents))
 
-col2.text('')
-skip_intro = col2.checkbox(
+skip_intro = st.checkbox(
     'Skip intro slides', value=False
 )
 
