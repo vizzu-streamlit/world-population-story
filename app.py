@@ -29,8 +29,8 @@ sel_continent = col1.selectbox(
     'Select continent',
     list(continents))
 
+col2.text('')
 skip_intro = col2.checkbox(
-    st.text('')
     'Skip intro slides', value=False
 )
 
