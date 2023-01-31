@@ -23,9 +23,15 @@ data.add_data_frame(df)
 
 continents = df['Continent'].unique()
 
-sel_continent = st.selectbox(
+col1, col2 = st.columns(2)
+
+sel_continent = col1.selectbox(
     'Select continent',
     list(continents))
+
+skip_intro = col2.checkbox(
+    'Skip intro slides', value=False
+)
 
 df_continent = df[df['Continent'] == sel_continent]
 
@@ -80,89 +86,91 @@ story.set_size(width, height)
 
 # Add the first slide, containing a single animation step 
 # that sets the initial chart.
-slide1 = Slide(
-    Step(
-        Data.filter("record.Period === 'Past' && record.Category === 'Population'"),
-        Config(
-            {
-                "x":"Year",
-                "y": "Medium",
-                "label": "Medium",
-                "title": "The Population of the World 1950-2020",
-            }
+
+if skip_intro == False:
+    slide1 = Slide(
+        Step(
+            Data.filter("record.Period === 'Past' && record.Category === 'Population'"),
+            Config(
+                {
+                    "x":"Year",
+                    "y": "Medium",
+                    "label": "Medium",
+                    "title": "The Population of the World 1950-2020",
+                }
+            )
         )
     )
-)
-# Add the slide to the story
-story.add_slide(slide1)
+    # Add the slide to the story
+    story.add_slide(slide1)
 
-# Show components side-by-side
-slide2 = Slide(
-    Step(
-        Config(
-            {
-                "y": ["Medium","Continent"],
-                "color": "Continent",
-                "label": None,
-                "title": "The Population of Continents 1950-2020",
-            }
-        ),
-        Style({ "plot.marker.colorPalette": continent_palette_str })
-    )
-)
-story.add_slide(slide2)
-
-# Show components side-by-side
-slide3 = Slide()
-slide3.add_step(    
-    Step(
-        Data.filter("record.Category === 'Population'"),
-        Config(
-            {
-                "y": ["Medium","Continent"],
-                "color": "Continent",
-        #     "lightness": "Period",
-        #     "x": ["Year","Period"],
-                "title": "The Population of Continents 1950-2100",
-            }
-        )
-))
-
-slide3.add_step(    
-    Step(
-        Config(
-            {
-            "geometry":"area"
-            }
-        )
-))
-
-story.add_slide(slide3)
-
-slide4 = Slide(
-    Step(
-        Config(
-            {
-                "split": True
-            }
+    # Show components side-by-side
+    slide2 = Slide(
+        Step(
+            Config(
+                {
+                    "y": ["Medium","Continent"],
+                    "color": "Continent",
+                    "label": None,
+                    "title": "The Population of Continents 1950-2020",
+                }
+            ),
+            Style({ "plot.marker.colorPalette": continent_palette_str })
         )
     )
-)
-story.add_slide(slide4)
+    story.add_slide(slide2)
 
-slide5 = Slide(
-    Step(
-        Config.percentageArea(
-            {
-                "x":"Year",
-                "y":"Medium",
-                "stackedBy":"Continent",
-                "title": "The Population of Continents 1950-2100 (%)"
-            }
+    # Show components side-by-side
+    slide3 = Slide()
+    slide3.add_step(    
+        Step(
+            Data.filter("record.Category === 'Population'"),
+            Config(
+                {
+                    "y": ["Medium","Continent"],
+                    "color": "Continent",
+            #     "lightness": "Period",
+            #     "x": ["Year","Period"],
+                    "title": "The Population of Continents 1950-2100",
+                }
+            )
+    ))
+
+    slide3.add_step(    
+        Step(
+            Config(
+                {
+                "geometry":"area"
+                }
+            )
+    ))
+
+    story.add_slide(slide3)
+
+    slide4 = Slide(
+        Step(
+            Config(
+                {
+                    "split": True
+                }
+            )
         )
     )
-)
-story.add_slide(slide5)
+    story.add_slide(slide4)
+
+    slide5 = Slide(
+        Step(
+            Config.percentageArea(
+                {
+                    "x":"Year",
+                    "y":"Medium",
+                    "stackedBy":"Continent",
+                    "title": "The Population of Continents 1950-2100 (%)"
+                }
+            )
+        )
+    )
+    story.add_slide(slide5)
 
 slide6 = Slide()
 slide6.add_step(    
