@@ -57,11 +57,12 @@ category_palette_str = ' '.join(category_palette)
 # Define the style of the charts in the story
 style = Style(
     {
+        'legend' : {'width' : '100%'},
         "plot": {
             "yAxis": {
                 "label": {
                     "fontSize": "1em",
-                    "paddingRight": "1.2em",
+                    #"paddingRight": "1.2em",
                     'numberFormat' : 'grouped',
                 },
                 "title": {"color": "#ffffff00"},
@@ -104,6 +105,8 @@ if skip_intro == False:
     )
     # Add the slide to the story
     story.add_slide(slide1)
+
+
 
     # Show components side-by-side
     slide2 = Slide(
