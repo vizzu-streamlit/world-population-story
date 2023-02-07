@@ -35,7 +35,7 @@ skip_intro = st.checkbox(
 
 df_continent = df[df['Continent'] == sel_continent]
 
-pop_max = int(df_continent[df_continent['Category'] == 'Population'][[int('Medium [m]'),int('High [m]'),int('Low [m]')]].max().T.max()*1.1)
+pop_max = int(df_continent[df_continent['Category'] == 'Population'][['Medium [m]','High [m]','Low [m]']].max().T.max()*1.1)
 
 df_future = df_continent[df_continent['Period'] == 'Future']
 
