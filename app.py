@@ -62,6 +62,7 @@ style = Style(
                 "label": {
                     "fontSize": "1em",
                     "paddingRight": "1.2em",
+                    'numberFormat' : 'grouped',
                 },
                 "title": {"color": "#ffffff00"},
             },
@@ -203,7 +204,7 @@ slide7 = Slide(
         Config(
             {
                 "y":"High [m]",
-                "title": "High [m] prediction for "+sel_continent
+                "title": "High prediction for "+sel_continent
             }
         )
     )
@@ -215,7 +216,7 @@ slide8 = Slide(
         Config(
             {
                 "y":"Low [m]",
-                "title": "Low [m] prediction for "+sel_continent
+                "title": "Low prediction for "+sel_continent
             }
         )
     )
@@ -227,7 +228,7 @@ slide9 = Slide(
         Config(
             {
                 "y":"Medium [m]",
-                "title": "Medium [m] prediction for "+sel_continent
+                "title": "Medium prediction for "+sel_continent
             }
         )
     )
@@ -292,7 +293,7 @@ slide12.add_step(
                     "x":{"set":["Medium [m]","Year"],"range":{"max":other_max,"min":other_min}},
                     "y":{"set": "Category", "range":{"max":"auto"}},
                 },
-                "title": "Sum of births, deaths, and migration after 2020 - Medium [m] prediction"
+                "title": "Sum of births, deaths, and migration after 2020 - Medium prediction"
             }
         )
     )
@@ -318,7 +319,7 @@ slide13 = Slide(
             {
                 "x":"High [m]",
                 "label": "High [m]",
-                "title": "Sum of births, deaths, and migration after 2020 - High [m] prediction"
+                "title": "Sum of births, deaths, and migration after 2020 - High prediction"
             }
         )
     )
@@ -331,7 +332,7 @@ slide14 = Slide(
             {
                 "x":"Low [m]",
                 "label": "Low [m]",
-                "title": "Sum of births, deaths, and migration after 2020 - Low [m] prediction"
+                "title": "Sum of births, deaths, and migration after 2020 - Low prediction"
             }
         )
     )
