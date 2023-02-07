@@ -17,7 +17,7 @@ height=450
 
 # initialize chart
 data = Data()
-df = pd.read_csv("Data/world_pop.csv", dtype={"Year": str})
+df = pd.read_csv("Data/worldpop.csv", dtype={"Year": str})
 data.add_data_frame(df)
 #@title Create the story
 
