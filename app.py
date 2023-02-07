@@ -155,8 +155,9 @@ if skip_intro == False:
             Config(
                 {
                     "split": True
-                }
-            )
+                },
+            ),
+            Style('plot' : {'yAxis' :{ 'label' :{ 'color' : '#99999900'}}})
         )
     )
     story.add_slide(slide4)
@@ -170,7 +171,8 @@ if skip_intro == False:
                     "stackedBy":"Continent",
                     "title": "The Population of Continents 1950-2100 (%)"
                 }
-            )
+            ),
+            Style('plot' : {'yAxis' :{ 'label' :{ 'color' : '#99999900'}}})
         )
     )
     story.add_slide(slide5)
