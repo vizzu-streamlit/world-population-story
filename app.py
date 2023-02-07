@@ -29,22 +29,17 @@ sel_continent = st.selectbox(
     'Select continent',
     list(continents))
 
-<<<<<<< HEAD
-skip_intro = col2.checkbox(
-    st.text(''),
-=======
 skip_intro = st.checkbox(
->>>>>>> b053e961b4bd926f1eabda516ee883c48a7d5da7
     'Skip intro slides', value=False
 )
 
 df_continent = df[df['Continent'] == sel_continent]
 
-pop_max = int(df_continent[df_continent['Category'] == 'Population'][['Medium','High','Low']].max().T.max()*1.1)
+pop_max = int(df_continent[df_continent['Category'] == 'Population'][['Medium [m]','High [m]','Low [m]']].max().T.max()*1.1)
 
 df_future = df_continent[df_continent['Period'] == 'Future']
 
-df_futureCategories = df_future[df_future['Category']!='Population'][['Category','Medium','High','Low']];
+df_futureCategories = df_future[df_future['Category']!='Population'][['Category','Medium [m]','High [m]','Low [m]']];
 
 df_future_sum = df_futureCategories.groupby('Category').sum().T
 
@@ -99,8 +94,8 @@ if skip_intro == False:
             Config(
                 {
                     "x":"Year",
-                    "y": "Medium",
-                    "label": "Medium",
+                    "y": "Medium [m]",
+                    "label": "Medium [m]",
                     "title": "The Population of the World 1950-2020",
                 }
             )
@@ -114,7 +109,7 @@ if skip_intro == False:
         Step(
             Config(
                 {
-                    "y": ["Medium","Continent"],
+                    "y": ["Medium [m]","Continent"],
                     "color": "Continent",
                     "label": None,
                     "title": "The Population of Continents 1950-2020",
@@ -132,7 +127,7 @@ if skip_intro == False:
             Data.filter("record.Category === 'Population'"),
             Config(
                 {
-                    "y": ["Medium","Continent"],
+                    "y": ["Medium [m]","Continent"],
                     "color": "Continent",
             #     "lightness": "Period",
             #     "x": ["Year","Period"],
@@ -168,7 +163,7 @@ if skip_intro == False:
             Config.percentageArea(
                 {
                     "x":"Year",
-                    "y":"Medium",
+                    "y":"Medium [m]",
                     "stackedBy":"Continent",
                     "title": "The Population of Continents 1950-2100 (%)"
                 }
@@ -183,7 +178,7 @@ slide6.add_step(
         Config.stackedArea(
             {
                 "x":"Year",
-                "y":"Medium",
+                "y":"Medium [m]",
                 "stackedBy":"Continent",
             }
         ),
@@ -207,8 +202,8 @@ slide7 = Slide(
     Step(
         Config(
             {
-                "y":"High",
-                "title": "High prediction for "+sel_continent
+                "y":"High [m]",
+                "title": "High [m] prediction for "+sel_continent
             }
         )
     )
@@ -219,8 +214,8 @@ slide8 = Slide(
     Step(
         Config(
             {
-                "y":"Low",
-                "title": "Low prediction for "+sel_continent
+                "y":"Low [m]",
+                "title": "Low [m] prediction for "+sel_continent
             }
         )
     )
@@ -231,8 +226,8 @@ slide9 = Slide(
     Step(
         Config(
             {
-                "y":"Medium",
-                "title": "Medium prediction for "+sel_continent
+                "y":"Medium [m]",
+                "title": "Medium [m] prediction for "+sel_continent
             }
         )
     )
@@ -244,7 +239,7 @@ slide10 = Slide(
         Data.filter(f'record.Continent === "{sel_continent}" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),
         Config(
             {
-                "y":["Medium","Category"],
+                "y":["Medium [m]","Category"],
                 "color": ["Category"],
                 "title": "Sources of growth: births and positive net migration"
             }),
@@ -294,10 +289,10 @@ slide12.add_step(
         Config(
             {
                 "channels":{
-                    "x":{"set":["Medium","Year"],"range":{"max":other_max,"min":other_min}},
+                    "x":{"set":["Medium [m]","Year"],"range":{"max":other_max,"min":other_min}},
                     "y":{"set": "Category", "range":{"max":"auto"}},
                 },
-                "title": "Sum of births, deaths, and migration after 2020 - Medium prediction"
+                "title": "Sum of births, deaths, and migration after 2020 - Medium [m] prediction"
             }
         )
     )
@@ -307,8 +302,8 @@ slide12.add_step(
     Step(
         Config(
             {
-                "x":"Medium",
-                "label":"Medium",
+                "x":"Medium [m]",
+                "label":"Medium [m]",
             }
         )
     )
@@ -321,9 +316,9 @@ slide13 = Slide(
     Step(
         Config(
             {
-                "x":"High",
-                "label": "High",
-                "title": "Sum of births, deaths, and migration after 2020 - High prediction"
+                "x":"High [m]",
+                "label": "High [m]",
+                "title": "Sum of births, deaths, and migration after 2020 - High [m] prediction"
             }
         )
     )
@@ -334,9 +329,9 @@ slide14 = Slide(
     Step(
         Config(
             {
-                "x":"Low",
-                "label": "Low",
-                "title": "Sum of births, deaths, and migration after 2020 - Low prediction"
+                "x":"Low [m]",
+                "label": "Low [m]",
+                "title": "Sum of births, deaths, and migration after 2020 - Low [m] prediction"
             }
         )
     )
