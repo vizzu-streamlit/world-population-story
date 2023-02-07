@@ -57,7 +57,7 @@ category_palette_str = ' '.join(category_palette)
 # Define the style of the charts in the story
 style = Style(
     {
-        'legend' : {'width' : '4em'},
+        'legend' : {'width' : '15em'},
         "plot": {
             "yAxis": {
                 "label": {
