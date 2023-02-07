@@ -75,6 +75,7 @@ style = Style(
                     "fontSize": "1em",
                     "paddingRight": "0em",
                     "paddingTop": "1em",
+                    'numberFormat' : 'grouped',
                 },
                 "title": {"color": "#ffffff00"},
             },
@@ -299,6 +300,7 @@ slide12.add_step(
                 },
                 "title": "Sum of births, deaths, and migration after 2020 - Medium prediction"
             }
+        Style({'plot' : {'marker' :{ 'label' :{ 'maxFractionDigits' : '1'}}}})
         )
     )
 )
