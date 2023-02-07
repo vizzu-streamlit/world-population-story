@@ -187,7 +187,7 @@ slide6.add_step(
                 "stackedBy":"Continent",
             }
         ),
-     Style(style,{'plot.marker.colorPalette': continent_palette_str})
+     Style(style) #,{'plot.marker.colorPalette': continent_palette_str}
 ))
 
 slide6.add_step(    
