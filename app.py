@@ -35,7 +35,7 @@ skip_intro = st.checkbox(
 
 df_continent = df[df['Continent'] == sel_continent]
 
-pop_max = float(df_continent[df_continent['Category'] == 'Population'][['Medium [m]','High [m]','Low [m]']].max().T.max()*1.1)
+pop_max = int(df_continent[df_continent['Category'] == 'Population'][[int('Medium [m]'),int('High [m]'),int('Low [m]')]].max().T.max()*1.1)
 
 df_future = df_continent[df_continent['Period'] == 'Future']
 
@@ -44,7 +44,7 @@ df_futureCategories = df_future[df_future['Category']!='Population'][['Category'
 df_future_sum = df_futureCategories.groupby('Category').sum().T
 
 other_max = df_future_sum.max().max() * 1.1
-other_min = df_future_sum.max().max() * -1.1 #df_future_sum.min().min() * 1.1
+other_min = df_future_sum.max().max() * -1.1 
 
 continent_palette = ["#FE7B00FF","#FEBF25FF","#55A4F3FF","#91BF3BFF","#E73849FF","#948DEDFF"]
 continent_palette_str = ' '.join(continent_palette)
