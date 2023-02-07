@@ -1,4 +1,4 @@
-Year,Continent,Period,Category,Medium [m],Low [m],High [m]
+Year,Continent,Period,Category,Medium [M],Low [M],High [M]
 1950,Africa,Past,Migration-,-0.5990,-0.5990,-0.5990
 1955,Africa,Past,Migration-,-1.6055,-1.6055,-1.6055
 1960,Africa,Past,Migration-,-1.1661,-1.1661,-1.1661
