@@ -172,7 +172,7 @@ if skip_intro == False:
                     "title": "The Population of Continents 1950-2100 (%)"
                 }
             ),
-            Style({'plot' : {'yAxis' :{ 'label' :{ 'color' : '#99999900'}}}})
+            Style({'plot' : {'yAxis' :{ 'label' :{ 'color' : '#999999FF'}}}})
         )
     )
     story.add_slide(slide5)
