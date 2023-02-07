@@ -66,7 +66,7 @@ style = Style(
                 "title": {"color": "#ffffff00"},
             },
             'marker' :{ 
-                'label' :{ 'numberFormat' : 'prefixed','maxFractionDigits' : '1'}
+                'label' :{'maxFractionDigits' : '1'}
             },
             "xAxis": {
                 "label": {
