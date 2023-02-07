@@ -175,7 +175,7 @@ if skip_intro == False:
     )
     story.add_slide(slide5)
 
-style["plot.marker.colorPalette"] = continent_palette_str
+#style["plot.marker.colorPalette"] = continent_palette_str
 
 slide6 = Slide()
 slide6.add_step(    
@@ -187,7 +187,7 @@ slide6.add_step(
                 "stackedBy":"Continent",
             }
         ),
-     Style(style)
+     Style(style,{'plot.marker.colorPalette': continent_palette_str})
 ))
 
 slide6.add_step(    
