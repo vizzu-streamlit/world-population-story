@@ -57,18 +57,17 @@ category_palette_str = ' '.join(category_palette)
 # Define the style of the charts in the story
 style = Style(
     {
-        'legend' : {'width' : '100%'},
+        'legend' : {'width' : '4em'},
         "plot": {
             "yAxis": {
                 "label": {
                     "fontSize": "1em",
-                    #"paddingRight": "1.2em",
                     'numberFormat' : 'grouped',
                 },
                 "title": {"color": "#ffffff00"},
             },
             'marker' :{ 
-                'label' :{ 'numberFormat' : 'grouped','maxFractionDigits' : '1'}
+                'label' :{ 'numberFormat' : 'grouped','maxFractionDigits' : '0'}
             },
             "xAxis": {
                 "label": {
