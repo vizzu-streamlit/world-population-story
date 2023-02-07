@@ -300,8 +300,9 @@ slide12.add_step(
                 },
                 "title": "Sum of births, deaths, and migration after 2020 - Medium prediction"
             },
+        ),
         Style({'plot' : {'marker' :{ 'label' :{ 'maxFractionDigits' : '1'}}}})
-        )
+
     )
 )
 
