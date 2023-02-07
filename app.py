@@ -55,8 +55,7 @@ category_palette = ["#FF8080FF", "#808080FF", continent_color.replace('FF','20')
 category_palette_str = ' '.join(category_palette)
 
 # Define the style of the charts in the story
-style = Style(
-    {
+style = {
         'legend' : {'width' : '13em'},
         "plot": {
             "yAxis": {
@@ -81,9 +80,8 @@ style = Style(
             },
         },
     }
-)
 
-story = Story(data=data, style=style)
+story = Story(data=data)
 story.set_size(width, height)
 
 # Add the first slide, containing a single animation step 
@@ -100,7 +98,8 @@ if skip_intro == False:
                     "label": "Medium [M]",
                     "title": "The Population of the World 1950-2020",
                 }
-            )
+            ),
+            Style(style)
         )
     )
     # Add the slide to the story
@@ -176,6 +175,8 @@ if skip_intro == False:
     )
     story.add_slide(slide5)
 
+style["plot.marker.colorPalette"] = continent_palette_str
+
 slide6 = Slide()
 slide6.add_step(    
     Step(
@@ -186,7 +187,7 @@ slide6.add_step(
                 "stackedBy":"Continent",
             }
         ),
-     Style({ "plot.marker.colorPalette": continent_palette_str },style)
+     Style(style)
 ))
 
 slide6.add_step(    
