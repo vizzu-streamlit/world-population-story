@@ -106,8 +106,6 @@ if skip_intro == False:
     # Add the slide to the story
     story.add_slide(slide1)
 
-
-
     # Show components side-by-side
     slide2 = Slide(
         Step(
@@ -188,7 +186,7 @@ slide6.add_step(
                 "stackedBy":"Continent",
             }
         ),
-        Style({ "plot.marker.colorPalette": continent_palette_str })
+       # Style({ "plot.marker.colorPalette": continent_palette_str })
 ))
 
 slide6.add_step(    
