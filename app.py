@@ -7,9 +7,8 @@ import streamlit as st
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
-st.set_page_config(page_title="World Population Streamlit Story", layout="centered")
-#st.sidebar.title("Poll results - Presentation tools")
-st.title("World Population Forecast - an interactive ipyvizzu-story in Streamlit")
+st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
+st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
 st.markdown('''T.B.D''') 
 
 width=750
@@ -17,27 +16,25 @@ height=450
 
 # initialize chart
 data = Data()
-df = pd.read_csv("Data/worldpop.csv", dtype={"Year": str})
+df = pd.read_csv('Data/worldpop.csv', dtype={'Year': str})
 data.add_data_frame(df)
 #@title Create the story
 
-continents = df['Continent'].unique()
+regions = df['Region'].unique()
 
-#col1, col2 = st.columns(2)
-
-sel_continent = st.selectbox(
-    'Select continent',
-    list(continents))
+sel_region = st.selectbox(
+    'Select region',
+    list(regions))
 
 skip_intro = st.checkbox(
     'Skip intro slides', value=False
 )
 
-df_continent = df[df['Continent'] == sel_continent]
+df_region = df[df['Region'] == sel_region]
 
-pop_max = int(df_continent[df_continent['Category'] == 'Population'][['Medium [M]','High [M]','Low [M]']].max().T.max()*1.1)
+pop_max = int(df_region[df_region['Category'] == 'Population'][['Medium [M]','High [M]','Low [M]']].max().T.max()*1.1)
 
-df_future = df_continent[df_continent['Period'] == 'Future']
+df_future = df_region[df_region['Period'] == 'Future']
 
 df_futureCategories = df_future[df_future['Category']!='Population'][['Category','Medium [M]','High [M]','Low [M]']];
 
@@ -46,37 +43,37 @@ df_future_sum = df_futureCategories.groupby('Category').sum().T
 other_max = df_future_sum.max().max() * 1.1
 other_min = df_future_sum.max().max() * -1.1 
 
-continent_palette = ["#FE7B00FF","#FEBF25FF","#55A4F3FF","#91BF3BFF","#E73849FF","#948DEDFF"]
-continent_palette_str = ' '.join(continent_palette)
+region_palette = ['#FE7B00FF','#FEBF25FF','#55A4F3FF','#91BF3BFF','#E73849FF','#948DEDFF']
+region_palette_str = ' '.join(region_palette)
 
-continent_color = continent_palette[list(continents).index(sel_continent)]
+region_color = region_palette[list(regions).index(sel_region)]
 
-category_palette = ["#FF8080FF", "#808080FF", continent_color.replace('FF','20'), "#60A0FFFF", "#80A080FF"]
+category_palette = ['#FF8080FF', '#808080FF', region_color.replace('FF','20'), '#60A0FFFF', '#80A080FF']
 category_palette_str = ' '.join(category_palette)
 
 # Define the style of the charts in the story
 style = {
         'legend' : {'width' : '13em'},
-        "plot": {
-            "yAxis": {
-                "label": {
-                    "fontSize": "1em",
+        'plot': {
+            'yAxis': {
+                'label': {
+                    'fontSize': '1em',
                     'numberFormat' : 'grouped',
                 },
-                "title": {"color": "#ffffff00"},
+                'title': {'color': '#ffffff00'},
             },
             'marker' :{ 
                 'label' :{ 'numberFormat' : 'grouped','maxFractionDigits' : '0'}
             },
-            "xAxis": {
-                "label": {
-                    "angle": "2.5",
-                    "fontSize": "1em",
-                    "paddingRight": "0em",
-                    "paddingTop": "1em",
+            'xAxis': {
+                'label': {
+                    'angle': '2.5',
+                    'fontSize': '1em',
+                    'paddingRight': '0em',
+                    'paddingTop': '1em',
                     'numberFormat' : 'grouped',
                 },
-                "title": {"color": "#ffffff00"},
+                'title': {'color': '#ffffff00'},
             },
         },
     }
@@ -93,10 +90,10 @@ if skip_intro == False:
             Data.filter("record.Period === 'Past' && record.Category === 'Population'"),
             Config(
                 {
-                    "x":"Year",
-                    "y": "Medium [M]",
-                    "label": "Medium [M]",
-                    "title": "The Population of the World 1950-2020",
+                    'x':'Year',
+                    'y': 'Medium [M]',
+                    'label': 'Medium [M]',
+                    'title': 'The Population of the World 1950-2020',
                 }
             ),
             Style(style)
@@ -110,13 +107,13 @@ if skip_intro == False:
         Step(
             Config(
                 {
-                    "y": ["Medium [M]","Continent"],
-                    "color": "Continent",
-                    "label": None,
-                    "title": "The Population of Continents 1950-2020",
+                    'y': ['Medium [M]','Region'],
+                    'color': 'Region',
+                    'label': None,
+                    'title': 'The Population of Regions 1950-2020',
                 }
             ),
-            Style({ "plot.marker.colorPalette": continent_palette_str })
+            Style({ 'plot.marker.colorPalette': region_palette_str })
         )
     )
     story.add_slide(slide2)
@@ -128,11 +125,11 @@ if skip_intro == False:
             Data.filter("record.Category === 'Population'"),
             Config(
                 {
-                    "y": ["Medium [M]","Continent"],
-                    "color": "Continent",
-            #     "lightness": "Period",
-            #     "x": ["Year","Period"],
-                    "title": "The Population of Continents 1950-2100",
+                    'y': ['Medium [M]','Region'],
+                    'color': 'Region',
+            #     'lightness': 'Period',
+            #     'x': ['Year','Period'],
+                    'title': 'The Population of Regions 1950-2100',
                 }
             )
     ))
@@ -141,7 +138,7 @@ if skip_intro == False:
         Step(
             Config(
                 {
-                "geometry":"area"
+                'geometry':'area'
                 }
             )
     ))
@@ -152,7 +149,7 @@ if skip_intro == False:
         Step(
             Config(
                 {
-                    "split": True
+                    'split': True
                 },
             ),
             Style({'plot' : {'yAxis' :{ 'label' :{ 'color' : '#99999900'}}}})
@@ -164,10 +161,10 @@ if skip_intro == False:
         Step(
             Config.percentageArea(
                 {
-                    "x":"Year",
-                    "y":"Medium [M]",
-                    "stackedBy":"Continent",
-                    "title": "The Population of Continents 1950-2100 (%)"
+                    'x':'Year',
+                    'y':'Medium [M]',
+                    'stackedBy':'Region',
+                    'title': 'The Population of Regions 1950-2100 (%)'
                 }
             ),
             Style({'plot' : {'yAxis' :{ 'label' :{ 'color' : '#999999FF'}}}})
@@ -175,28 +172,28 @@ if skip_intro == False:
     )
     story.add_slide(slide5)
 
-#style["plot.marker.colorPalette"] = continent_palette_str
+#style['plot.marker.colorPalette'] = region_palette_str
 
 slide6 = Slide()
 slide6.add_step(    
     Step(
         Config.stackedArea(
             {
-                "x":"Year",
-                "y":"Medium [M]",
-                "stackedBy":"Continent",
+                'x':'Year',
+                'y':'Medium [M]',
+                'stackedBy':'Region',
             }
         ),
-     Style(style) #,{'plot.marker.colorPalette': continent_palette_str}
+     Style(style) #,{'plot.marker.colorPalette': region_palette_str}
 ))
 
 slide6.add_step(    
     Step(
-        Data.filter(f'record.Category === "Population" && record.Continent === "{sel_continent}"'),
+        Data.filter(f'record.Category === "Population" && record.Region === "{sel_region}"'),
         Config({
-                "title": "The Population of "+sel_continent+" 1950-2100",
-                "channels":{"y":{
-                    "range":{"max":pop_max}
+                'title': 'The Population of '+sel_region+' 1950-2100',
+                'channels':{'y':{
+                    'range':{'max':pop_max}
                 }}
         }),
     ))
@@ -207,8 +204,8 @@ slide7 = Slide(
     Step(
         Config(
             {
-                "y":"High [M]",
-                "title": "High prediction for "+sel_continent
+                'y':'High [M]',
+                'title': 'High prediction for '+sel_region
             }
         )
     )
@@ -219,8 +216,8 @@ slide8 = Slide(
     Step(
         Config(
             {
-                "y":"Low [M]",
-                "title": "Low prediction for "+sel_continent
+                'y':'Low [M]',
+                'title': 'Low prediction for '+sel_region
             }
         )
     )
@@ -231,8 +228,8 @@ slide9 = Slide(
     Step(
         Config(
             {
-                "y":"Medium [M]",
-                "title": "Medium prediction for "+sel_continent
+                'y':'Medium [M]',
+                'title': 'Medium prediction for '+sel_region
             }
         )
     )
@@ -241,24 +238,24 @@ story.add_slide(slide9)
 
 slide10 = Slide(
     Step(
-        Data.filter(f'record.Continent === "{sel_continent}" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),
+        Data.filter(f'record.Region === "{sel_region}" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),
         Config(
             {
-                "y":["Medium [M]","Category"],
-                "color": ["Category"],
-                "title": "Sources of growth: births and positive net migration"
+                'y':['Medium [M]','Category'],
+                'color': ['Category'],
+                'title': 'Sources of growth: births and positive net migration'
             }),
-        Style({ "plot.marker.colorPalette": category_palette_str })
+        Style({ 'plot.marker.colorPalette': category_palette_str })
     )
 )
 story.add_slide(slide10)
 
 slide11 = Slide(
     Step(
-        Data.filter(f'record.Continent === "{sel_continent}"'),
+        Data.filter(f'record.Region === "{sel_region}"'),
         Config(
             {
-                "title": "Sources of loss: deaths and negative net migration"
+                'title': 'Sources of loss: deaths and negative net migration'
             }
         )
     )
@@ -271,7 +268,7 @@ slide12.add_step(
     Step(
         Config(
             {
-                "geometry":"rectangle",
+                'geometry':'rectangle',
             }
         )
     )
@@ -279,10 +276,10 @@ slide12.add_step(
 
 slide12.add_step(
     Step(
-        Data.filter(f'record.Period === "Future" && record.Continent === "{sel_continent}"'),
+        Data.filter(f'record.Period === "Future" && record.Region === "{sel_region}"'),
         Config(
             {
-                "title": "Zoom to the future"
+                'title': 'Zoom to the future'
             }
         )
     )
@@ -290,14 +287,14 @@ slide12.add_step(
 
 slide12.add_step(
     Step(
-        Data.filter(f'record.Period === "Future" && record.Continent === "{sel_continent}" && record.Category !== "Population"'),
+        Data.filter(f'record.Period === "Future" && record.Region === "{sel_region}" && record.Category !== "Population"'),
         Config(
             {
-                "channels":{
-                    "x":{"set":["Medium [M]","Year"],"range":{"max":other_max,"min":other_min}},
-                    "y":{"set": "Category", "range":{"max":"auto"}},
+                'channels':{
+                    'x':{'set':['Medium [M]','Year'],'range':{'max':other_max,'min':other_min}},
+                    'y':{'set': 'Category', 'range':{'max':'auto'}},
                 },
-                "title": "Sum of births, deaths, and migration after 2020 - Medium prediction"
+                'title': 'Sum of births, deaths, and migration after 2020 - Medium prediction'
             },
         ),
         Style({'plot' : {'marker' :{ 'label' :{ 'maxFractionDigits' : '1'}}}})
@@ -309,8 +306,8 @@ slide12.add_step(
     Step(
         Config(
             {
-                "x":"Medium [M]",
-                "label":"Medium [M]",
+                'x':'Medium [M]',
+                'label':'Medium [M]',
             }
         )
     )
@@ -323,9 +320,9 @@ slide13 = Slide(
     Step(
         Config(
             {
-                "x":"High [M]",
-                "label": "High [M]",
-                "title": "Sum of births, deaths, and migration after 2020 - High prediction"
+                'x':'High [M]',
+                'label': 'High [M]',
+                'title': 'Sum of births, deaths, and migration after 2020 - High prediction'
             }
         )
     )
@@ -336,9 +333,9 @@ slide14 = Slide(
     Step(
         Config(
             {
-                "x":"Low [M]",
-                "label": "Low [M]",
-                "title": "Sum of births, deaths, and migration after 2020 - Low prediction"
+                'x':'Low [M]',
+                'label': 'Low [M]',
+                'title': 'Sum of births, deaths, and migration after 2020 - Low prediction'
             }
         )
     )
@@ -346,10 +343,10 @@ slide14 = Slide(
 story.add_slide(slide14)
 
 # Switch on the tooltip that appears when the user hovers the mouse over a chart element.
-story.set_feature("tooltip", True)
+story.set_feature('tooltip', True)
 
 html(story._repr_html_(), width=width, height=height)
 
-st.download_button('Download HTML export', story.to_html(), file_name=f'world-population-story-{sel_continent}.html', mime='text/html')
+st.download_button('Download HTML export', story.to_html(), file_name=f'world-population-story-{sel_region}.html', mime='text/html')
 
 st.markdown('''T.B.D''')
