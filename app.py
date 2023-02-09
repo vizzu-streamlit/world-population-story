@@ -84,7 +84,9 @@ story.set_size(width, height)
 # Add the first slide, containing a single animation step 
 # that sets the initial chart.
 
-if skip_intro == False:
+if skip_intro == True:
+    style['plot']['marker']['colorPalette'] = region_palette_str
+else:
     slide1 = Slide(
         Step(
             Data.filter("record.Period === 'Past' && record.Category === 'Population'"),
@@ -172,9 +174,6 @@ if skip_intro == False:
     )
     story.add_slide(slide5)
 
-#style['plot.marker.colorPalette'] = region_palette_str
-
-style['plot']['marker']['colorPalette'] = region_palette_str
 
 slide6 = Slide()
 slide6.add_step(    
