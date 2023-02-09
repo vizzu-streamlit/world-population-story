@@ -174,6 +174,8 @@ if skip_intro == False:
 
 #style['plot.marker.colorPalette'] = region_palette_str
 
+style.plot.marker.colorPalette = region_palette_str
+
 slide6 = Slide()
 slide6.add_step(    
     Step(
