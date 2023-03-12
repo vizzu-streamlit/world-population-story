@@ -32,11 +32,11 @@ skip_intro = st.checkbox(
 
 df_region = df[df['Region'] == sel_region]
 
-pop_max = int(df_region[df_region['Category'] == 'Population'][['Medium [M]','High [M]','Low [M]']].max().T.max()*1.1)
+pop_max = int(df_region[df_region['Category'] == 'Population'][['Medium','High','Low']].max().T.max()*1.1)
 
 df_future = df_region[df_region['Period'] == 'Future']
 
-df_futureCategories = df_future[df_future['Category']!='Population'][['Category','Medium [M]','High [M]','Low [M]']];
+df_futureCategories = df_future[df_future['Category']!='Population'][['Category','Medium','High','Low']];
 
 df_future_sum = df_futureCategories.groupby('Category').sum().T
 
@@ -58,12 +58,17 @@ style = {
             'yAxis': {
                 'label': {
                     'fontSize': '1em',
-                    'numberFormat' : 'grouped',
+                    'numberFormat' : 'prefixed',
+                    'numberScale':'shortScaleSymbolUS'
                 },
                 'title': {'color': '#ffffff00'},
             },
             'marker' :{ 
-                'label' :{ 'numberFormat' : 'grouped','maxFractionDigits' : '0'}
+                'label' :{ 
+                    'numberFormat' : 'prefixed',
+                    'maxFractionDigits' : '1',
+                    'numberScale':'shortScaleSymbolUS',
+                }
             },
             'xAxis': {
                 'label': {
@@ -93,8 +98,8 @@ else:
             Config(
                 {
                     'x':'Year',
-                    'y': 'Medium [M]',
-                    'label': 'Medium [M]',
+                    'y': 'Medium',
+                    'label': 'Medium',
                     'title': 'The Population of the World 1950-2020',
                 }
             ),
@@ -109,7 +114,7 @@ else:
         Step(
             Config(
                 {
-                    'y': ['Medium [M]','Region'],
+                    'y': ['Medium','Region'],
                     'color': 'Region',
                     'label': None,
                     'title': 'The Population of Regions 1950-2020',
@@ -127,7 +132,7 @@ else:
             Data.filter("record.Category === 'Population'"),
             Config(
                 {
-                    'y': ['Medium [M]','Region'],
+                    'y': ['Medium','Region'],
                     'color': 'Region',
             #     'lightness': 'Period',
             #     'x': ['Year','Period'],
@@ -164,7 +169,7 @@ else:
             Config.percentageArea(
                 {
                     'x':'Year',
-                    'y':'Medium [M]',
+                    'y':'Medium',
                     'stackedBy':'Region',
                     'title': 'The Population of Regions 1950-2100 (%)'
                 }
@@ -181,7 +186,7 @@ slide6.add_step(
         Config.stackedArea(
             {
                 'x':'Year',
-                'y':'Medium [M]',
+                'y':'Medium',
                 'stackedBy':'Region',
             }
         ),
@@ -205,7 +210,7 @@ slide7 = Slide(
     Step(
         Config(
             {
-                'y':'High [M]',
+                'y':'High',
                 'title': 'High prediction for '+sel_region
             }
         )
@@ -217,7 +222,7 @@ slide8 = Slide(
     Step(
         Config(
             {
-                'y':'Low [M]',
+                'y':'Low',
                 'title': 'Low prediction for '+sel_region
             }
         )
@@ -229,7 +234,7 @@ slide9 = Slide(
     Step(
         Config(
             {
-                'y':'Medium [M]',
+                'y':'Medium',
                 'title': 'Medium prediction for '+sel_region
             }
         )
@@ -242,7 +247,7 @@ slide10 = Slide(
         Data.filter(f'record.Region === "{sel_region}" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),
         Config(
             {
-                'y':['Medium [M]','Category'],
+                'y':['Medium','Category'],
                 'color': ['Category'],
                 'title': 'Sources of growth: births and positive net migration'
             }),
@@ -292,7 +297,7 @@ slide12.add_step(
         Config(
             {
                 'channels':{
-                    'x':{'set':['Medium [M]','Year'],'range':{'max':other_max,'min':other_min}},
+                    'x':{'set':['Medium','Year'],'range':{'max':other_max,'min':other_min}},
                     'y':{'set': 'Category', 'range':{'max':'auto'}},
                 },
                 'title': 'Sum of births, deaths, and migration after 2020 - Medium prediction'
@@ -307,8 +312,8 @@ slide12.add_step(
     Step(
         Config(
             {
-                'x':'Medium [M]',
-                'label':'Medium [M]',
+                'x':'Medium',
+                'label':'Medium',
             }
         )
     )
@@ -321,8 +326,8 @@ slide13 = Slide(
     Step(
         Config(
             {
-                'x':'High [M]',
-                'label': 'High [M]',
+                'x':'High',
+                'label': 'High',
                 'title': 'Sum of births, deaths, and migration after 2020 - High prediction'
             }
         )
@@ -334,8 +339,8 @@ slide14 = Slide(
     Step(
         Config(
             {
-                'x':'Low [M]',
-                'label': 'Low [M]',
+                'x':'Low',
+                'label': 'Low',
                 'title': 'Sum of births, deaths, and migration after 2020 - Low prediction'
             }
         )
