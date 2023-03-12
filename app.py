@@ -9,7 +9,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
 st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
-st.markdown('''T.B.D''') 
+#st.markdown('''T.B.D''') 
 
 width=750
 height=450
@@ -355,4 +355,4 @@ html(story._repr_html_(), width=width, height=height)
 
 st.download_button('Download HTML export', story.to_html(), file_name=f'world-population-story-{sel_region}.html', mime='text/html')
 
-st.markdown('''T.B.D''')
+#st.markdown('''T.B.D''')
