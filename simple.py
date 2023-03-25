@@ -204,3 +204,5 @@ slide13 = Slide(
 story.add_slide(slide13)
 
 story.set_feature("tooltip", True)
+
+html(story._repr_html_(), width=width, height=height)
