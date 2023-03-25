@@ -203,4 +203,4 @@ slide13 = Slide(
 ))
 story.add_slide(slide13)
 
-story6.set_feature("tooltip", True)
+story.set_feature("tooltip", True)
