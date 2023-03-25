@@ -22,11 +22,6 @@ data.add_data_frame(df)
 story = Story(data=data)
 story.set_size(width, height)
 
-story = Story(data=data)
-#story.set_feature("tooltip", True)
-story.set_size("100%", "100%")
-
-
 slide1 = Slide(
     Step(
         Data.filter("record.Period == 'Past'"),       
