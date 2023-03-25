@@ -27,8 +27,8 @@ slide1 = Slide(
         Data.filter("record.Period == 'Past'"),       
         Config({
                 'x': 'Year',
-                'y': 'Population',
-                'label':'Population',
+                'y': 'Medium',
+                'label':'Medium',
                 'title': 'The Population of the World 1950-2020'
             }),
         Style({
@@ -46,7 +46,7 @@ story.add_slide(slide1)
 slide2 = Slide(
     Step(
        Config({
-                'y': ['Population','Region'],
+                'y': ['Medium','Region'],
                 'color': 'Region',
                 'label': None,
                 'title': 'The Population of Regions 1950-2020',
