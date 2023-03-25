@@ -137,6 +137,30 @@ slide9 = Slide(
 
 story.add_slide(slide9)
 
+slide9_2 = Slide(
+    Step(
+Data.filter('record.Region === "Africa" && record.Category === "Population"'),        
+        Config({
+                'x': 'Year',
+                'y': { "set":['Medium','Category'],"range": {"max": 6000000000} },
+                'color':'Category',
+                'geometry':'area',
+                'title': 'The Population of Africa 1950-2100 - Medium Prediction'
+            }),
+        Style({
+            'legend' : {'width' : '9em'},
+            "plot": { 'paddingLeft' : '8em',
+                "yAxis": { "label": { 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
+                'marker' :{ 'colorPalette' : '#FF8080FF #808080FF #FE7B00FF #60A0FFFF #80A080FF', 'label' :{ 'numberFormat' : 'prefixed','maxFractionDigits' : '1','numberScale':'shortScaleSymbolUS'}},
+                "xAxis": { "label": {"angle": "2.5"}},
+        }
+    })
+    )
+)
+
+story.add_slide(slide9_2)
+
+
 slide10 = Slide()
 
 slide10.add_step(
