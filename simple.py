@@ -148,16 +148,6 @@ slide11 = Slide()
 
 slide11.add_step(
     Step(
-        Data.filter("record.Region == 'Africa' && record.Category == 'Population'"),
-        Config({
-		    'y': ['Medium','Category'],
-            'title': 'The Population of Africa 1950-2100 - Medium Prediction'
-        }),
-    )
-)
-
-slide11.add_step(
-    Step(
         Config({
 			'title': 'Adding Sources of Gain and Loss to the Mix '
         }),
