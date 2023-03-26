@@ -109,7 +109,7 @@ slide7.add_step(
         Data.filter("record.Region == 'Africa' && record.Category == 'Population'"),
         Config({
 		    'y': { "set":['Medium','Category'],"range": {"max": 6000000000} },
-            'title': 'The Population of Africa 1950-2100 - Medium Prediction'
+            'title': 'Medium Prediction for Africa'
         }),
     )
 )
@@ -120,7 +120,7 @@ slide8 = Slide(
     Step(
         Config({
             'y': ['High','Region'],
-            'title': 'The Population of Africa 1950-2100 - High Prediction'
+            'title': 'High Prediction for Africa'
 })))
 
 story.add_slide(slide8)
@@ -129,31 +129,24 @@ slide9 = Slide(
     Step(
         Config({
             'y': ['Low','Region'],
-            'title': 'The Population of Africa 1950-2100 - Low Prediction'
+            'title': 'Low Prediction for Africa'
 })))
 
 story.add_slide(slide9)
 
-'''
-slide9_2 = Slide(
+slide10 = Slide(
     Step(
-        Style({
-            'legend' : {'width' : '9em'},
-            "plot": { 'paddingLeft' : '8em',
-                "yAxis": { "label": { 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
-                'marker' :{ 'colorPalette' : '#FF8080FF #808080FF #FE7B00FF #60A0FFFF #80A080FF', 'label' :{ 'numberFormat' : 'prefixed','maxFractionDigits' : '1','numberScale':'shortScaleSymbolUS'}},
-                "xAxis": { "label": {"angle": "2.5"}},
-        }
-    })
-    )
-)
+        Config({
+            'y': ['Medium','Region'],
+            'title': 'Medium Prediction for Africa'
+})))
 
-story.add_slide(slide9_2)
-'''
+story.add_slide(slide10)
 
-slide10 = Slide()
 
-slide10.add_step(
+slide11 = Slide()
+
+slide11.add_step(
     Step(
         Data.filter("record.Region == 'Africa' && record.Category == 'Population'"),
         Config({
@@ -163,7 +156,7 @@ slide10.add_step(
     )
 )
 
-slide10.add_step(
+slide11.add_step(
     Step(
         Config({
 			'title': 'Adding Sources of Gain and Loss to the Mix '
@@ -171,7 +164,7 @@ slide10.add_step(
     )
 )
 
-slide10.add_step(
+slide11.add_step(
     Step(
         Data.filter("record.Region == 'Africa' && (record.Category == 'Population' || record.Category == 'Migration+' || record.Category == 'Births')"),  
 		Config({
@@ -181,16 +174,16 @@ slide10.add_step(
     )
 )
 
-slide10.add_step(
+slide11.add_step(
     Step(
 		Data.filter("record.Region == 'Africa'")
     )
 )
-story.add_slide(slide10)
+story.add_slide(slide11)
 
-slide11 = Slide()
+slide12 = Slide()
 
-slide11.add_step(
+slide12.add_step(
     Step(
         Config({
             'geometry':'rectangle'
@@ -198,7 +191,7 @@ slide11.add_step(
     )
 )
 
-slide11.add_step(
+slide12.add_step(
     Step(
         Data.filter("record.Region === 'Africa' && record.Category !== 'Population' && record.Period === 'Future'"),  
         Config({
@@ -209,11 +202,11 @@ slide11.add_step(
     )
 )
 
-slide11.add_step(Step(Config({'label':'Medium'})))
+slide12.add_step(Step(Config({'label':'Medium'})))
 
-story.add_slide(slide11)
+story.add_slide(slide12)
 
-slide12 = Slide(
+slide13 = Slide(
     Step(
         Config({
             'x' : 'High',
@@ -221,9 +214,9 @@ slide12 = Slide(
             'title': 'Sources of Population Gain and Loss - High Scenario'
         })
 ))
-story.add_slide(slide12)
+story.add_slide(slide13)
 
-slide13 = Slide(
+slide14 = Slide(
     Step(
         Config({
             'x' : 'Low',
@@ -231,7 +224,7 @@ slide13 = Slide(
             'title': 'Sources of Population Gain and Loss - Low Scenario'
         })
 ))
-story.add_slide(slide13)
+story.add_slide(slide14)
 
 story.set_feature("tooltip", True)
 
