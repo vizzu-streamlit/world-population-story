@@ -157,7 +157,7 @@ slide10.add_step(
     Step(
         Data.filter("record.Region == 'Africa' && record.Category == 'Population'"),
         Config({
-		    'y': {['Medium','Category']},
+		    'y': ['Medium','Category'],
             'title': 'The Population of Africa 1950-2100 - Medium Prediction'
         }),
     )
