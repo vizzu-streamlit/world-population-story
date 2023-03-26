@@ -55,33 +55,33 @@ slide2 = Slide(
 
 story.add_slide(slide2)
 
-slide3 = Slide(
+slide3 = Slide()
+
+slide3.add_step(
     Step(
         Data.filter("record.Category === 'Population'"),
         Config({'title': 'The Population of Regions 1950-2100'}),
         Style({'plot':{"xAxis": { "label": {"angle": "2.5",'fontSize':'90%'}}}})
 ))
 
-story.add_slide(slide3)
-
-slide4 = Slide(
+slide3.add_step(
     Step(
         Config({'geometry': 'area'}),
     )
 )
 
-story.add_slide(slide4)
+story.add_slide(slide3)
 
-slide5 = Slide(
+slide4 = Slide(
     Step(
         Config({'split': True}),
         Style({'plot': {'yAxis':{ 'label':{'color':'#00000000'}}}})
     ),
 )
 
-story.add_slide(slide5)
+story.add_slide(slide4)
 
-slide6 = Slide(
+slide5 = Slide(
     Step(
         Config({
             'split': False, 
@@ -92,11 +92,11 @@ slide6 = Slide(
     ),
 )
 
-story.add_slide(slide6)
+story.add_slide(slide5)
 
-slide7 = Slide()
+slide6 = Slide()
 
-slide7.add_step(
+slide6.add_step(
     Step(
         Config({
             'align':'min'
@@ -104,7 +104,7 @@ slide7.add_step(
     ),
 )
 
-slide7.add_step(
+slide6.add_step(
     Step(
         Data.filter("record.Region == 'Africa' && record.Category == 'Population'"),
         Config({
@@ -114,13 +114,22 @@ slide7.add_step(
     )
 )
 
+story.add_slide(slide6)
+
+slide7 = Slide(
+    Step(
+        Config({
+            'y': ['High','Region'],
+            'title': 'High Prediction for Africa'
+})))
+
 story.add_slide(slide7)
 
 slide8 = Slide(
     Step(
         Config({
-            'y': ['High','Region'],
-            'title': 'High Prediction for Africa'
+            'y': ['Low','Region'],
+            'title': 'Low Prediction for Africa'
 })))
 
 story.add_slide(slide8)
@@ -128,25 +137,16 @@ story.add_slide(slide8)
 slide9 = Slide(
     Step(
         Config({
-            'y': ['Low','Region'],
-            'title': 'Low Prediction for Africa'
-})))
-
-story.add_slide(slide9)
-
-slide10 = Slide(
-    Step(
-        Config({
             'y': ['Medium','Region'],
             'title': 'Medium Prediction for Africa'
 })))
 
-story.add_slide(slide10)
+story.add_slide(slide9)
 
 
-slide11 = Slide()
+slide10 = Slide()
 
-slide11.add_step(
+slide10.add_step(
     Step(
         Config({
 			'y':['Medium','Category'],
@@ -155,7 +155,7 @@ slide11.add_step(
     )
 )
 
-slide11.add_step(
+slide10.add_step(
     Step(
         Data.filter("record.Region == 'Africa' && (record.Category == 'Population' || record.Category == 'Migration+' || record.Category == 'Births')"),  
 		Config({
@@ -165,16 +165,16 @@ slide11.add_step(
     )
 )
 
-slide11.add_step(
+slide10.add_step(
     Step(
 		Data.filter("record.Region == 'Africa'")
     )
 )
-story.add_slide(slide11)
+story.add_slide(slide10)
 
-slide12 = Slide()
+slide11 = Slide()
 
-slide12.add_step(
+slide11.add_step(
     Step(
         Config({
             'geometry':'rectangle'
@@ -182,7 +182,7 @@ slide12.add_step(
     )
 )
 
-slide12.add_step(
+slide11.add_step(
     Step(
         Data.filter("record.Region === 'Africa' && record.Category !== 'Population' && record.Period === 'Future'"),  
         Config({
@@ -193,11 +193,11 @@ slide12.add_step(
     )
 )
 
-slide12.add_step(Step(Config({'label':'Medium'})))
+slide11.add_step(Step(Config({'label':'Medium'})))
 
-story.add_slide(slide12)
+story.add_slide(slide11)
 
-slide13 = Slide(
+slide12 = Slide(
     Step(
         Config({
             'x' : 'High',
@@ -205,9 +205,9 @@ slide13 = Slide(
             'title': 'Sources of Population Gain and Loss - High Scenario'
         })
 ))
-story.add_slide(slide13)
+story.add_slide(slide12)
 
-slide14 = Slide(
+slide13 = Slide(
     Step(
         Config({
             'x' : 'Low',
@@ -215,7 +215,7 @@ slide14 = Slide(
             'title': 'Sources of Population Gain and Loss - Low Scenario'
         })
 ))
-story.add_slide(slide14)
+story.add_slide(slide13)
 
 story.set_feature("tooltip", True)
 
