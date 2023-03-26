@@ -242,21 +242,30 @@ slide9 = Slide(
 )
 story.add_slide(slide9)
 
-slide10 = Slide(
+slide10 = Slide()
+
+slide10.add_step(
+    Step(
+        Config({
+			'y':['Medium','Category'],
+			'title': 'Adding Sources of Gain and Loss to the Mix '
+        }),
+    )
+)
+
+slide10.add_step(
     Step(
         Data.filter(f'record.Region === "{sel_region}" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),
         Config(
             {
-                'y':['Medium','Category'],
                 'color': ['Category'],
                 'title': 'Sources of growth: births and positive net migration'
             }),
         Style({ 'plot.marker.colorPalette': category_palette_str })
     )
 )
-story.add_slide(slide10)
 
-slide11 = Slide(
+slide10.add_step(
     Step(
         Data.filter(f'record.Region === "{sel_region}"'),
         Config(
@@ -266,11 +275,11 @@ slide11 = Slide(
         )
     )
 )
-story.add_slide(slide11)
+story.add_slide(slide10)
 
-slide12 = Slide()
+slide11 = Slide()
 
-slide12.add_step(
+slide11.add_step(
     Step(
         Config(
             {
@@ -280,7 +289,7 @@ slide12.add_step(
     )
 )
 
-slide12.add_step(
+slide11.add_step(
     Step(
         Data.filter(f'record.Period === "Future" && record.Region === "{sel_region}"'),
         Config(
@@ -291,7 +300,7 @@ slide12.add_step(
     )
 )
 
-slide12.add_step(
+slide11.add_step(
     Step(
         Data.filter(f'record.Period === "Future" && record.Region === "{sel_region}" && record.Category !== "Population"'),
         Config(
@@ -300,7 +309,7 @@ slide12.add_step(
                     'x':{'set':['Medium','Year'],'range':{'max':other_max,'min':other_min}},
                     'y':{'set': 'Category', 'range':{'max':'auto'}},
                 },
-                'title': 'Sum of births, deaths, and migration after 2020 - Medium prediction'
+                'title': 'Sources of Population Gain and Loss - Medium Scenario'
             },
         ),
         Style({'plot' : {'marker' :{ 'label' :{ 'maxFractionDigits' : '1'}}}})
@@ -308,7 +317,7 @@ slide12.add_step(
     )
 )
 
-slide12.add_step(
+slide11.add_step(
     Step(
         Config(
             {
@@ -320,33 +329,33 @@ slide12.add_step(
 )
 
 
+story.add_slide(slide11)
+
+slide12 = Slide(
+    Step(
+        Config(
+            {
+                'x':'High',
+                'label': 'High',
+                'title': 'Sources of Population Gain and Loss - High Scenario'
+            }
+        )
+    )
+)
 story.add_slide(slide12)
 
 slide13 = Slide(
     Step(
         Config(
             {
-                'x':'High',
-                'label': 'High',
-                'title': 'Sum of births, deaths, and migration after 2020 - High prediction'
+                'x':'Low',
+                'label': 'Low',
+                'title': 'Sources of Population Gain and Loss - Low Scenario'
             }
         )
     )
 )
 story.add_slide(slide13)
-
-slide14 = Slide(
-    Step(
-        Config(
-            {
-                'x':'Low',
-                'label': 'Low',
-                'title': 'Sum of births, deaths, and migration after 2020 - Low prediction'
-            }
-        )
-    )
-)
-story.add_slide(slide14)
 
 # Switch on the tooltip that appears when the user hovers the mouse over a chart element.
 story.set_feature('tooltip', True)
