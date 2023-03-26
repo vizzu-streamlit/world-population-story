@@ -196,7 +196,7 @@ slide11.add_step(
         Data.filter('record.Region === "Africa" && record.Period === "Future"'),  
         Config({
             'x': {'set':'Medium','range' : {'min': -6000000000 , 'max': 6000000000}},
-            'y': {'set':'Category', 'range' : {'max' : 'auto'},
+            'y': {'set':'Category', 'range' : {'max' : 'auto'}},
             'title': 'Sources of Population Gain and Loss - Medium Scenario'
         })
     )
