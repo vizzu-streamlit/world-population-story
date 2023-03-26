@@ -166,18 +166,17 @@ slide10.add_step(
 slide10.add_step(
     Step(
         Data.filter("record.Region == 'Africa' && (record.Category == 'Population' || record.Category == 'Migration+' || record.Category == 'Births')"),  
-		Config({'color': 'Category'}),
+		Config({
+			'color': 'Category',
+			'title': 'Adding sources of gain and loss to the mix '
+		}),
         Style({ 'plot.marker.colorPalette': '#FF8080FF #808080FF #FE7B0020 #60A0FFFF #80A080FF' })
     )
 )
 
 slide10.add_step(
     Step(
-        Config(
-            {
-                'title': 'Adding sources of gain and loss to the mix '
-            }
-        )
+		Data.filter("record.Region == 'Africa'")
     )
 )
 story.add_slide(slide10)
@@ -194,10 +193,10 @@ slide11.add_step(
 
 slide11.add_step(
     Step(
-        Data.filter('record.Region === "Africa" && record.Category !== "Population" && record.Period === "Future"'),  
+        Data.filter('record.Region === "Africa" && record.Period === "Future"'),  
         Config({
             'x': {'set':'Medium','range' : {'min': -6000000000 , 'max': 6000000000}},
-            'y': 'Category',
+            'y': {'set':'Category', 'range' : {'max' : 'auto'}
             'title': 'Sources of Population Gain and Loss - Medium Scenario'
         })
     )
