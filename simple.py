@@ -193,7 +193,7 @@ slide11.add_step(
 
 slide11.add_step(
     Step(
-        Data.filter('record.Region === "Africa" && record.Period === "Future"'),  
+        Data.filter("record.Region === 'Africa' && record.Category !== 'Population' && record.Period === 'Future'"),  
         Config({
             'x': {'set':'Medium','range' : {'min': -6000000000 , 'max': 6000000000}},
             'y': {'set':'Category', 'range' : {'max' : 'auto'}},
