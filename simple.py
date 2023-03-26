@@ -155,14 +155,14 @@ slide10 = Slide()
 
 slide10.add_step(
     Step(
-        Data.filter('record.Region === "Africa" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),  
+        Data.filter("record.Region == 'Africa' && (record.Category == 'Population' || record.Category == 'Migration+' || record.Category == 'Births'"),  
+		Config({'y': ['Category','Medium']})
         Style({ 'plot.marker.colorPalette': '#FF8080FF #808080FF #FE7B0020 #60A0FFFF #80A080FF' })
     )
 )
 
 slide10.add_step(
     Step(
-        Data.filter('record.Region === "Africa"'),
         Config(
             {
                 'title': 'Adding sources of gain and loss to the mix '
