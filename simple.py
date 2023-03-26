@@ -7,11 +7,7 @@ import streamlit as st
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
-st.set_page_config(page_title='World Population Streamlit Story - Simple version', layout='centered')
-st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
-
-width=750
-height=450
+st.set_page_config(page_title='World Population Story in Streamlit - Simple version', layout='centered')
 
 # initialize chart
 data = Data()
@@ -20,11 +16,11 @@ data.add_data_frame(df)
 #@title Create the story
 
 story = Story(data=data)
-story.set_size(width, height)
+story.set_size(750, 450)
 
 slide1 = Slide(
     Step(
-        Data.filter("record.Period == 'Past'"),       
+        Data.filter("record.Period === 'Past' && record.Category === 'Population'"),       
         Config({
                 'x': 'Year',
                 'y': 'Medium',
@@ -61,7 +57,7 @@ story.add_slide(slide2)
 
 slide3 = Slide(
     Step(
-        Data.filter(None),
+        Data.filter("record.Category === 'Population'"),
         Config({'title': 'The Population of Regions 1950-2100'}),
         Style({'plot':{"xAxis": { "label": {"angle": "2.5",'fontSize':'90%'}}}})
 ))
