@@ -108,7 +108,8 @@ slide7.add_step(
     Step(
         Data.filter("record.Region == 'Africa' && record.Category == 'Population'"),
         Config({
-            'title': 'The Population of Africa 1950-2100'
+		    'y': { "set":['Medium','Category'],"range": {"max": 6000000000} },
+            'title': 'The Population of Africa 1950-2100 - Medium Prediction'
         }),
     )
 )
@@ -133,16 +134,9 @@ slide9 = Slide(
 
 story.add_slide(slide9)
 
+'''
 slide9_2 = Slide(
     Step(
-Data.filter('record.Region === "Africa" && record.Category === "Population"'),        
-        Config({
-                'x': 'Year',
-                'y': { "set":['Medium','Category'],"range": {"max": 6000000000} },
-                'color':'Category',
-                'geometry':'area',
-                'title': 'The Population of Africa 1950-2100 - Medium Prediction'
-            }),
         Style({
             'legend' : {'width' : '9em'},
             "plot": { 'paddingLeft' : '8em',
@@ -155,7 +149,7 @@ Data.filter('record.Region === "Africa" && record.Category === "Population"'),
 )
 
 story.add_slide(slide9_2)
-
+'''
 
 slide10 = Slide()
 
