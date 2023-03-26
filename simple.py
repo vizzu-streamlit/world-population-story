@@ -31,7 +31,7 @@ slide1 = Slide(
             "plot": { 'paddingLeft' : '8em',
                 "yAxis": { 'title': {'color': '#FFFFFF00' },"label": { 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
                 'marker' :{ 'label' :{ 'numberFormat' : 'prefixed','maxFractionDigits' : '1','numberScale':'shortScaleSymbolUS'}},
-                "xAxis": { "label": {"angle": "2.5"}},
+                "xAxis": { 'title': {'color': '#FFFFFF00' }, "label": {"angle": "2.5", 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
         }
     })
     )
@@ -165,10 +165,17 @@ slide10.add_step(
 
 slide10.add_step(
     Step(
+        Config({
+			'title': 'Adding Sources of Gain and Loss to the Mix '
+        }),
+    )
+)
+
+slide10.add_step(
+    Step(
         Data.filter("record.Region == 'Africa' && (record.Category == 'Population' || record.Category == 'Migration+' || record.Category == 'Births')"),  
 		Config({
-			'color': 'Category',
-			'title': 'Adding sources of gain and loss to the mix '
+			'color': 'Category'
 		}),
         Style({ 'plot.marker.colorPalette': '#FF8080FF #808080FF #FE7B0020 #60A0FFFF #80A080FF' })
     )
