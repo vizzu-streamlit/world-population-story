@@ -149,6 +149,7 @@ slide11 = Slide()
 slide11.add_step(
     Step(
         Config({
+			'y':['Medium','Category'],
 			'title': 'Adding Sources of Gain and Loss to the Mix '
         }),
     )
