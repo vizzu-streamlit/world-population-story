@@ -258,8 +258,7 @@ slide10.add_step(
         Data.filter(f'record.Region === "{sel_region}" && (record.Category === "Population" || record.Category === "Migration+" || record.Category === "Births")'),
         Config(
             {
-                'color': ['Category'],
-                'title': 'Sources of growth: births and positive net migration'
+                'color': ['Category']
             }),
         Style({ 'plot.marker.colorPalette': category_palette_str })
     )
@@ -268,11 +267,6 @@ slide10.add_step(
 slide10.add_step(
     Step(
         Data.filter(f'record.Region === "{sel_region}"'),
-        Config(
-            {
-                'title': 'Sources of loss: deaths and negative net migration'
-            }
-        )
     )
 )
 story.add_slide(slide10)
