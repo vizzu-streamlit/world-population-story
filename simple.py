@@ -225,4 +225,4 @@ story.add_slide(slide13)
 
 story.set_feature("tooltip", True)
 
-html(story._repr_html_(), width=width, height=height)
+html(story._repr_html_(), width=750, height=450)
