@@ -29,7 +29,7 @@ slide1 = Slide(
             }),
         Style({
             "plot": { 'paddingLeft' : '8em',
-                "yAxis": { 'title': {'color': '#FFFFFF00' }"label": { 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
+                "yAxis": { 'title': {'color': '#FFFFFF00' },"label": { 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
                 'marker' :{ 'label' :{ 'numberFormat' : 'prefixed','maxFractionDigits' : '1','numberScale':'shortScaleSymbolUS'}},
                 "xAxis": { "label": {"angle": "2.5"}},
         }
