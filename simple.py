@@ -29,7 +29,7 @@ slide1 = Slide(
             }),
         Style({
             "plot": { 'paddingLeft' : '8em',
-                "yAxis": { "label": { 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
+                "yAxis": { 'title': {'color': '#FFFFFF00' }"label": { 'numberFormat' : 'prefixed','numberScale':'shortScaleSymbolUS'}},
                 'marker' :{ 'label' :{ 'numberFormat' : 'prefixed','maxFractionDigits' : '1','numberScale':'shortScaleSymbolUS'}},
                 "xAxis": { "label": {"angle": "2.5"}},
         }
@@ -106,7 +106,7 @@ slide7.add_step(
 
 slide7.add_step(
     Step(
-        Data.filter("record.Region == 'Africa'"),
+        Data.filter("record.Region == 'Africa' && record.Category == 'Population'"),
         Config({
             'title': 'The Population of Africa 1950-2100'
         }),
