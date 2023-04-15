@@ -89,7 +89,7 @@ story.set_size(width, height)
 # Add the first slide, containing a single animation step 
 # that sets the initial chart.
 
-if skip_intro == True:
+if skip_intro:
     style['plot']['marker']['colorPalette'] = region_palette_str
 else:
     slide1 = Slide(
