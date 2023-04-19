@@ -16,7 +16,7 @@ data.add_data_frame(df)
 #@title Create the story
 
 story = Story(data=data)
-story.set_size(750, 450)
+story.set_size(600, 400)
 
 slide1 = Slide(
     Step(
