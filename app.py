@@ -2,16 +2,13 @@ from streamlit.components.v1 import html
 import pandas as pd
 from ipyvizzu import Data, Config, Style
 from ipyvizzustory import Story, Slide, Step
-import pathlib
-import shutil
-from bs4 import BeautifulSoup
 import ssl
 import streamlit as st 
 
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
-html("""<script>
+st.markdown("""<script>
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
@@ -23,7 +20,7 @@ html("""<script>
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.async=true; g.src='//cdn.matomo.cloud/vizzuhq.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
   })();
-</script>""")
+</script>""", unsafe_allow_html=True)
 
 st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
 st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
