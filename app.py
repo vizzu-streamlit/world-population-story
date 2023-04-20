@@ -24,7 +24,7 @@ matamo = """<script>
     g.async=true; g.src='//cdn.matomo.cloud/vizzuhq.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>"""
-html(matamo)
+html(f'<head>{matamo}</head>')
 
 width=750
 height=450
