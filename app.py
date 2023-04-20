@@ -2,8 +2,12 @@ from streamlit.components.v1 import html
 import pandas as pd
 from ipyvizzu import Data, Config, Style
 from ipyvizzustory import Story, Slide, Step
+import pathlib
+import shutil
+from bs4 import BeautifulSoup
 import ssl
 import streamlit as st 
+
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
@@ -28,7 +32,6 @@ def inject_matamo():
 </script>"""
     # Insert the script in the head tag of the static template inside your virtual
     index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-    logging.info(f'editing {index_path}')
     soup = BeautifulSoup(index_path.read_text(), features="lxml")
     if not soup.find(id=matamo_id):  # if cannot find tag
         bck_index = index_path.with_suffix('.bck')
