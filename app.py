@@ -9,7 +9,22 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
 st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
-#st.markdown('''T.B.D''') 
+#st.markdown('''T.B.D''')
+
+matamo = """<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://vizzuhq.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '3']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/vizzuhq.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>"""
+html(matamo)
 
 width=750
 height=450
