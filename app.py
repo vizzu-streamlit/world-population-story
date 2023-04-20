@@ -12,9 +12,8 @@ import streamlit as st
 ssl._create_default_https_context = ssl._create_unverified_context  
 
 st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
-st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
-#st.markdown('''T.B.D''')
-
+st.title('World Population Forecast')
+st.header('An interactive ipyvizzu-story in Streamlit')
 def inject_matamo():
     matamo_id = "matamo"
     matamo_js = """<script>
@@ -30,7 +29,7 @@ def inject_matamo():
     g.async=true; g.src='//cdn.matomo.cloud/vizzuhq.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>"""
-    # Insert the script in the head tag of the static template inside your virtual
+
     index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
     soup = BeautifulSoup(index_path.read_text(), 'lxml')
     if not soup.find(id=matamo_id):  # if cannot find tag
@@ -392,4 +391,6 @@ html(story._repr_html_(), width=width, height=height)
 
 st.download_button('Download HTML export', story.to_html(), file_name=f'world-population-story-{sel_region}.html', mime='text/html')
 
-#st.markdown('''T.B.D''')
+st.markdown('Thanks for using the app! If you want to learn more about how it works, check out my [blog post](https://blog.streamlit.io/create-an-animated-data-story-with-ipyvizzu-and-streamlit/) on creating animated data stories with ipyvizzu and Streamlit.')
+st.markdown('You can find the code for the app on this [GitHub repo](https://github.com/vizzu-streamlit/world-population-story)')
+st.markdown('Visit our [homepage](https://vizzuhq.com) to learn more about our open-source charting and data storytelling tools.')	
