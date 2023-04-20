@@ -11,7 +11,7 @@ import streamlit as st
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
-st.markdown(
+html(
     """<script>
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -24,7 +24,7 @@ st.markdown(
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.async=true; g.src='//cdn.matomo.cloud/vizzuhq.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
   })();
-</script>""", unsafe_allow_html=True)
+</script>""")
 
 st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
 st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
