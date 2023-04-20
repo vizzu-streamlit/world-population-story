@@ -9,7 +9,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
 st.title('World Population Forecast')
-st.title('An interactive ipyvizzu-story in Streamlit')
+st.header('An interactive ipyvizzu-story in Streamlit')
 
 width=570
 height=400
