@@ -11,13 +11,8 @@ import streamlit as st
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
-st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
-st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
-#st.markdown('''T.B.D''')
-
-def inject_matamo():
-    matamo_id = "matamo"
-    matamo_js = """<script>
+st.markdown(
+    """<script>
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
@@ -29,21 +24,11 @@ def inject_matamo():
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.async=true; g.src='//cdn.matomo.cloud/vizzuhq.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
   })();
-</script>"""
-    # Insert the script in the head tag of the static template inside your virtual
-    index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-    soup = BeautifulSoup(index_path.read_text(), 'lxml')
-    if not soup.find(id=matamo_id):  # if cannot find tag
-        bck_index = index_path.with_suffix('.bck')
-        if bck_index.exists():
-            shutil.copy(bck_index, index_path)  # recover from backup
-        else:
-            shutil.copy(index_path, bck_index)  # keep a backup
-        html = str(soup)
-        new_html = html.replace('<head>', '<head>\n' + matamo_js)
-        index_path.write_text(new_html)
-	
-inject_matamo()
+</script>""", unsafe_allow_html=True)
+
+st.set_page_config(page_title='World Population Streamlit Story', layout='centered')
+st.title('World Population Forecast - an interactive ipyvizzu-story in Streamlit')
+#st.markdown('''T.B.D''')
 
 width=750
 height=450
