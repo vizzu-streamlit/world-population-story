@@ -391,6 +391,11 @@ html(story._repr_html_(), width=width, height=height)
 
 st.download_button('Download HTML export', story.to_html(), file_name=f'world-population-story-{sel_region}.html', mime='text/html')
 
-st.markdown('Thanks for using the app! If you want to learn more about how it works, check out my [blog post](https://blog.streamlit.io/create-an-animated-data-story-with-ipyvizzu-and-streamlit/) on creating animated data stories with ipyvizzu and Streamlit.')
-st.markdown('You can find the code for the app on this [GitHub repo](https://github.com/vizzu-streamlit/world-population-story)')
-st.markdown('Visit our [homepage](https://vizzuhq.com) to learn more about our open-source charting and data storytelling tools.')	
+st.header('Thanks for using the app! :heart_eyes:') 
+col1, col2 = st.columns(2)
+with col1:
+	st.markdown('If you want to learn more about how it works, check out this [blog post](https://blog.streamlit.io/create-an-animated-data-story-with-ipyvizzu-and-streamlit/) on creating animated data stories with ipyvizzu and Streamlit. :chart_with_upwards_trend::film_frames::balloon:')
+	st.markdown('You can find the code for the app on this [GitHub repo](https://github.com/vizzu-streamlit/world-population-story)')
+	st.markdown('Visit our [homepage](https://vizzuhq.com)] to learn more about our open-source charting and data storytelling tools.')
+with col2:
+	st.markdown('![homepage [homepage](https://vizzuhq.com)](https://github.com/vizzuhq/vizzu-lib-doc/raw/main/docs/readme/infinite-60.gif)')		
