@@ -32,7 +32,7 @@ def inject_matamo():
 </script>"""
     # Insert the script in the head tag of the static template inside your virtual
     index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
-    soup = BeautifulSoup(index_path.read_text(), features="lxml")
+    soup = BeautifulSoup(index_path.read_text(), 'lxml')
     if not soup.find(id=matamo_id):  # if cannot find tag
         bck_index = index_path.with_suffix('.bck')
         if bck_index.exists():

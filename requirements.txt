@@ -3,4 +3,5 @@ ipyvizzu-story
 pandas
 streamlit
 numpy
+lxml
 beautifulsoup4
