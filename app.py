@@ -11,8 +11,7 @@ import streamlit as st
 
 ssl._create_default_https_context = ssl._create_unverified_context  
 
-html(
-    """<script>
+html("""<script>
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(['trackPageView']);
