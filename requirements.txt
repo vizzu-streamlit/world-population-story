@@ -1,5 +1,5 @@
 ipyvizzu~=0.16.0 
-ipyvizzu-story~=0.7.0 
+ipyvizzu-story~=0.6.0 
 pandas
 streamlit
 numpy
