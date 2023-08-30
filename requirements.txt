@@ -1,7 +1,7 @@
-ipyvizzu
-ipyvizzu-story
+ipyvizzu~=0.16.0 
+ipyvizzu-story~=0.7.0 
 pandas
 streamlit
 numpy
 lxml
-beautifulsoup4
+beautifulsoup
