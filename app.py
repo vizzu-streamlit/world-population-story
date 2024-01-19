@@ -4,7 +4,6 @@ from ipyvizzu import Data, Config, Style
 from ipyvizzustory import Story, Slide, Step
 import pathlib
 import shutil
-from bs4 import BeautifulSoup
 import ssl
 import streamlit as st 
 
